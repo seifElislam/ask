@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+
+  postgresdb:
+   image: postgres
+   container_name: postgresdb
+   ports:
+    - "5444:5432"
+   environment:
+    - POSTGRES_USER=root
+    - POSTGRES_DB=ask_db
+    - POSTGRES_PASSWORD=root
+   networks: ['stack']
+
+  ask_app:
+   image: ask_app:latest
+   build:
+     context: .
+     dockerfile: ./docker/Dockerfile
+   container_name: ask_app
+   volumes:
+     - .:/app
+   ports:
+     - "7000:8000"
+   depends_on:
+     - postgresdb
+   environment:
+     - STAGE=dev
+   networks: ['stack']
+   command: /start
+
+
+
+
+networks:
+  stack:
+    driver: bridge
