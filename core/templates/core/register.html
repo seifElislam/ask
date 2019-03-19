@@ -1,0 +1,24 @@
+{% extends "core/base.html" %}
+{% block title %}ASK - login{% endblock %}
+{% block body %}
+<div>
+    {{error_msg}}
+</div>
+
+<div>
+    <h1>New Account</h1>
+    <form action="/register/" method="post">
+        {% csrf_token %}
+        username:<br>
+        <input type="text" name="username" placeholder=""><br>
+        email:<br>
+        <input type="email" name="email" placeholder=""><br>
+        password:<br>
+        <input type="password" name="password" placeholder=""><br>
+        confirm password:<br>
+        <input type="password" name="confirmPassword" placeholder=""><br><br>
+        <input type="submit" value="Submit">
+    </form>
+
+</div>
+{% endblock %}
