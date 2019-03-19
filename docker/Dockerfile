@@ -6,7 +6,7 @@ RUN apt-get update
 #RUN apt-get install -y build-essential python3-mysqldb git vim default-libmysqlclient-dev
 
 COPY ./requirements /requirements
-RUN pip install -r /requirements/base_requirements.txt
+RUN pip install -rU /requirements/base_requirements.txt
 
 COPY ./docker/start /start
 RUN chmod +x /start
