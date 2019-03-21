@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.views import View
 from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
 
 
 class Login(View):
@@ -32,14 +33,14 @@ class Login(View):
         user = authenticate(username=username, password=password)
         if user:
             login(request, user)
-            return render(request, 'core/home.html')
+            return HttpResponseRedirect('/home/')
         else:
-            return render(request, 'core/login.html')
+            return render(request, 'core/login.html', {'error_msg': 'No user with these data, Please signup.'})
 
 
 class Home(View):
     """
-    Login view
+    Home view
     """
     # def get_permissions(self):
     #     """
@@ -93,7 +94,6 @@ class Register(View):
         username = request.POST.get('username')
         password = request.POST.get('password')
         confirmed_password = request.POST.get('confirmPassword')
-        print(username, email, password, confirmed_password)
         if not email:
             return render(request, 'core/register.html', {'error_msg': 'Please fill all the form'})
         try:
@@ -107,3 +107,15 @@ class Register(View):
         return render(request, 'core/login.html')
 
 
+class Logout(View):
+    """
+
+    """
+
+    @staticmethod
+    def get(request):
+        """
+        Logout a user and redirect to login page
+        """
+        logout(request)
+        return HttpResponseRedirect('/login/')
