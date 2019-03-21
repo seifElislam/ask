@@ -9,13 +9,12 @@
     </style>
 </head>
 <body>
+<header>{% block header %}{% endblock %}</header>
 <div class="wrapper">
-    <div class="header">
-        <h1>ASK</h1>
-    </div>
     <div class="content">{% block body %} {% endblock %}</div>
 </div>
-<footer class="footer"></footer>
-
+<footer class="footer">{% block footer %}{% endblock %}</footer>
+<script> {% block javascript %} {% endblock %} </script>
 </body>
+
 </html>

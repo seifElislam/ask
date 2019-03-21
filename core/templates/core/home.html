@@ -1,7 +1,10 @@
 {% extends "core/base.html" %}
 {% block title %}ASK - Home{% endblock %}
+{% block header %}<a href="/logout/" >Logout</a>{% endblock %}
 {% block body %}
 <div>
     <h1>Home</h1>
 </div>
 {% endblock %}
+
+{% block javascript %}var log = function(e){console.log('new login')}; log() {% endblock %}
